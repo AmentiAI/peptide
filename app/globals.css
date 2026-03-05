@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #0f4c81;
+  --accent: #1a73e8;
+  --background: #f9fafb;
+  --foreground: #111827;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Dynamic primary color utilities */
+.bg-primary { background-color: var(--primary); }
+.text-primary { color: var(--primary); }
+.border-primary { border-color: var(--primary); }
+.bg-accent { background-color: var(--accent); }
+.text-accent { color: var(--accent); }
+.hover\:bg-primary-dark:hover { background-color: color-mix(in srgb, var(--primary) 85%, black); }
+.ring-primary { --tw-ring-color: var(--primary); }
