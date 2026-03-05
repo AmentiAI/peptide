@@ -1,16 +1,55 @@
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { getSiteFromHeaders } from '@/lib/sites'
+import { getSiteFromDB } from '@/lib/db-sites'
+import { db } from '@/db'
+import { sites as sitesTable } from '@/db/schema'
+import { eq } from 'drizzle-orm'
+import { getPageSections } from '@/lib/db-sections'
+import SectionRenderer from '@/components/sections/SectionRenderer'
 import { FEATURED_PRODUCTS } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
 
+async function getSiteIdByDomain(host: string): Promise<number | null> {
+  try {
+    const domain = host.split(':')[0].replace(/^www\./, '')
+    const rows = await db.select({ id: sitesTable.id }).from(sitesTable).where(eq(sitesTable.domain, domain)).limit(1)
+    return rows[0]?.id ?? null
+  } catch {
+    return null
+  }
+}
+
 export default async function HomePage() {
   const headersList = await headers()
-  const site = getSiteFromHeaders(headersList)
+  const host =
+    headersList.get('x-site-host') ||
+    headersList.get('x-forwarded-host') ||
+    headersList.get('host') ||
+    'peptidevault.com'
+
+  const dbSite = await getSiteFromDB(host).catch(() => null)
+  const site = dbSite ?? getSiteFromHeaders(headersList)
+
+  const siteId = await getSiteIdByDomain(host).catch(() => null)
+  const dbSections = siteId ? await getPageSections(siteId, 'home').catch(() => []) : []
+
+  if (dbSections.length > 0) {
+    return (
+      <SectionRenderer
+        sections={dbSections.map((s) => ({
+          id: s.id,
+          sectionType: s.sectionType,
+          isVisible: s.isVisible,
+          content: s.content,
+        }))}
+      />
+    )
+  }
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero — static fallback */}
       <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{

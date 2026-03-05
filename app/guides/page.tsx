@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { getSiteFromHeaders } from '@/lib/sites'
-import { getGuides } from '@/lib/guides'
+import { getGuides as getGuidesFromFS } from '@/lib/guides'
+import { getGuides as getGuidesFromDB } from '@/lib/db-guides'
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
@@ -14,7 +15,29 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function GuidesPage() {
-  const guides = await getGuides()
+  let guides: { slug: string; title: string; description: string; tags?: string[]; date?: string; readTime?: string }[] = []
+
+  const dbGuides = await getGuidesFromDB().catch(() => [])
+  if (dbGuides.length > 0) {
+    guides = dbGuides.map((g) => ({
+      slug: g.slug,
+      title: g.title,
+      description: g.description,
+      tags: g.tags,
+      date: g.publishedAt?.toISOString(),
+      readTime: g.readTime,
+    }))
+  } else {
+    const fsGuides = await getGuidesFromFS().catch(() => [])
+    guides = fsGuides.map((g) => ({
+      slug: g.slug,
+      title: g.title,
+      description: g.description,
+      tags: g.tags,
+      date: g.date,
+      readTime: g.readTime != null ? String(g.readTime) : undefined,
+    }))
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -45,7 +68,7 @@ export default async function GuidesPage() {
             <p className="text-gray-600 text-sm mb-3">{guide.description}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
               {guide.date && <span>{new Date(guide.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
-              {guide.readTime && <span>{guide.readTime} min read</span>}
+              {guide.readTime && <span>{guide.readTime}</span>}
             </div>
           </Link>
         ))}

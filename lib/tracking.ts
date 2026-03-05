@@ -1,3 +1,6 @@
+import { db } from '@/db'
+import { clicks } from '@/db/schema'
+
 export interface ClickEvent {
   site: string
   affiliateId: string
@@ -11,15 +14,18 @@ export interface ClickEvent {
 }
 
 export async function logClick(event: ClickEvent): Promise<void> {
-  // In production, replace with your preferred analytics/DB:
-  // - Vercel KV, PlanetScale, Supabase, or a simple webhook
-  // For now, log to console (visible in Vercel function logs)
-  console.log('[affiliate-click]', JSON.stringify(event))
-
-  // Optional: POST to external analytics endpoint
-  // await fetch(process.env.ANALYTICS_WEBHOOK_URL!, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(event),
-  // })
+  try {
+    await db.insert(clicks).values({
+      siteDomain: event.site,
+      affiliateId: event.affiliateId,
+      vendor: event.vendor,
+      productSlug: event.productSlug,
+      productName: event.productName,
+      ip: event.ip,
+      userAgent: event.userAgent,
+      referrer: event.referrer,
+    })
+  } catch (err) {
+    console.log('[affiliate-click]', JSON.stringify(event), err)
+  }
 }

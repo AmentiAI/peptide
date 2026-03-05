@@ -2,20 +2,31 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Analytics } from '@vercel/analytics/react'
 import { getSiteFromHeaders } from '@/lib/sites'
+import { getSiteFromDB } from '@/lib/db-sites'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import './globals.css'
 
-export async function generateMetadata(): Promise<Metadata> {
+async function getSiteConfig() {
   const headersList = await headers()
-  const site = getSiteFromHeaders(headersList)
+  const host =
+    headersList.get('x-site-host') ||
+    headersList.get('x-forwarded-host') ||
+    headersList.get('host') ||
+    'peptidevault.com'
+  const dbSite = await getSiteFromDB(host).catch(() => null)
+  return dbSite ?? getSiteFromHeaders(headersList)
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteConfig()
   return {
     title: {
       default: `${site.name} | ${site.tagline}`,
       template: `%s | ${site.name}`,
     },
     description: site.description,
-    metadataBase: new URL(site.baseUrl),
+    metadataBase: new URL(site.baseUrl || 'https://peptidevault.com'),
     openGraph: {
       siteName: site.name,
       type: 'website',
@@ -24,8 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headersList = await headers()
-  const site = getSiteFromHeaders(headersList)
+  const site = await getSiteConfig()
 
   return (
     <html lang="en">
