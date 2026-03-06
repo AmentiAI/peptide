@@ -5,7 +5,10 @@ const COOKIE_NAME = 'admin_token'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
 
 function sign(value: string): string {
-  const secret = process.env.ADMIN_SECRET!
+  const secret = process.env.ADMIN_SECRET
+  if (!secret) {
+    throw new Error('ADMIN_SECRET environment variable is not set. Please configure it in Vercel settings.')
+  }
   const mac = createHmac('sha256', secret).update(value).digest('hex')
   return `${value}.${mac}`
 }
