@@ -17,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ProductsPage() {
   const categories = getProductsByCategory()
   const categoryList = Object.keys(categories)
+  const totalProducts = Object.keys(PRODUCTS).length
 
   // Category info with icons and gradients
   const categoryMeta: Record<string, { icon: string; gradient: string; description: string }> = {
@@ -63,7 +64,7 @@ export default async function ProductsPage() {
               Research Peptides Catalog
             </h1>
             <p className="text-xl text-purple-100 mb-6">
-              Browse {Object.keys(PRODUCTS).length} premium research peptides with verified purity
+              {totalProducts} pharmaceutical-grade research peptides, all third-party lab tested with Certificate of Analysis
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium">
