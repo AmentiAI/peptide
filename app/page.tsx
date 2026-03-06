@@ -9,6 +9,8 @@ import { getPageSections } from '@/lib/db-sections'
 import SectionRenderer from '@/components/sections/SectionRenderer'
 import { FEATURED_PRODUCTS } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
+import HeroCarousel from '@/components/HeroCarousel'
+import { HOME_SLIDES } from '@/lib/carousel-slides'
 
 async function getSiteIdByDomain(host: string): Promise<number | null> {
   try {
@@ -47,42 +49,26 @@ export default async function HomePage() {
     )
   }
 
+  const carouselSlides = HOME_SLIDES.map((slide) => ({
+    ...slide,
+    headline: slide.headline,
+    subheadline: slide.subheadline,
+  }))
+  // Personalize first slide with site tagline
+  carouselSlides[0] = {
+    ...carouselSlides[0],
+    headline: site.tagline,
+    subheadline: site.description + ' All products are strictly for research purposes only.',
+  }
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10">
-          <div className="max-w-3xl">
-            <div className="hero-badge">
-              <span className="hero-pulse" />
-              Lab-Tested • Certificate of Analysis Included
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-              {site.tagline}
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
-              {site.description} All products are strictly for research purposes only.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/products"
-                className="btn btn-lg bg-white text-primary hover:bg-gray-100"
-              >
-                Browse Products
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <Link
-                href="/guides"
-                className="btn btn-lg glass-dark text-white border-white/30 hover:bg-white/20"
-              >
-                Research Guides
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel
+        slides={carouselSlides}
+        primaryColor={site.primaryColor}
+        height="lg"
+      />
 
       {/* Trust Bar */}
       <section className="trust-bar">

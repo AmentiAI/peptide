@@ -3,6 +3,8 @@ import { headers } from 'next/headers'
 import { getSiteFromHeaders } from '@/lib/sites'
 import { PRODUCTS, getProductsByCategory } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
+import HeroCarousel from '@/components/HeroCarousel'
+import { PRODUCTS_SLIDES } from '@/lib/carousel-slides'
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
@@ -17,6 +19,8 @@ export default async function ProductsPage() {
   const categories = getProductsByCategory()
 
   return (
+    <>
+      <HeroCarousel slides={PRODUCTS_SLIDES} height="sm" />
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-gray-900">Research Peptides</h1>
@@ -38,5 +42,6 @@ export default async function ProductsPage() {
         </section>
       ))}
     </div>
+    </>
   )
 }

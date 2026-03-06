@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { getSiteFromHeaders } from '@/lib/sites'
 import { getGuides as getGuidesFromFS } from '@/lib/guides'
 import { getGuides as getGuidesFromDB } from '@/lib/db-guides'
+import HeroCarousel from '@/components/HeroCarousel'
+import { GUIDES_SLIDES } from '@/lib/carousel-slides'
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
@@ -40,6 +42,8 @@ export default async function GuidesPage() {
   }
 
   return (
+    <>
+      <HeroCarousel slides={GUIDES_SLIDES} height="sm" />
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-10">
         <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Research Guides</h1>
@@ -74,5 +78,6 @@ export default async function GuidesPage() {
         ))}
       </div>
     </div>
+    </>
   )
 }

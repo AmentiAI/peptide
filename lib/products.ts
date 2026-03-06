@@ -19,6 +19,8 @@ const VENDOR_BASE = {
   peptidesciences: 'https://www.peptidesciences.com',
 }
 
+const IMG = 'https://images.unsplash.com'
+
 export const PRODUCTS: Record<string, Product> = {
   'bpc-157': {
     slug: 'bpc-157',
@@ -37,7 +39,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '250-500mcg per day, subcutaneous or intramuscular injection',
     halfLife: '4 hours',
-    image: '/images/bpc-157.svg',
+    image: `${IMG}/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['healing', 'recovery', 'gut health', 'tendon'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/bpc-157/`,
@@ -61,7 +63,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '2-2.5mg twice per week',
     halfLife: 'Unknown, estimated days',
-    image: '/images/tb-500.svg',
+    image: `${IMG}/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['healing', 'recovery', 'muscle', 'injury'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/tb-500/`,
@@ -85,7 +87,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '1-2mg per week',
     halfLife: '6-8 days (with DAC)',
-    image: '/images/cjc-1295.svg',
+    image: `${IMG}/photo-1631651363775-dba8c9c86c55?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['growth hormone', 'GHRH', 'anti-aging', 'body composition'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/cjc-1295-with-dac/`,
@@ -109,7 +111,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '200-300mcg 2-3x daily',
     halfLife: '2 hours',
-    image: '/images/ipamorelin.svg',
+    image: `${IMG}/photo-1576671081837-49000212a223?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['growth hormone', 'secretagogue', 'anti-aging'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/ipamorelin/`,
@@ -133,7 +135,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '200-500mcg before bed',
     halfLife: '10-20 minutes',
-    image: '/images/sermorelin.svg',
+    image: `${IMG}/photo-1582560475093-ba66accbc424?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['growth hormone', 'GHRH', 'anti-aging'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/sermorelin/`,
@@ -156,7 +158,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '0.5-1mg as needed',
     halfLife: '33-36 hours',
-    image: '/images/melanotan-2.svg',
+    image: `${IMG}/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['melanocortin', 'tanning', 'libido'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/melanotan-2/`,
@@ -179,7 +181,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '1-2mg as needed, 45 min before',
     halfLife: '2.7 hours',
-    image: '/images/pt-141.svg',
+    image: `${IMG}/photo-1576091160400-b7be5f35a2bb?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['melanocortin', 'sexual health', 'libido'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/pt-141-bremelanotide/`,
@@ -203,7 +205,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '1-2mg per day topically or subcutaneously',
     halfLife: 'Short, minutes in blood',
-    image: '/images/ghk-cu.svg',
+    image: `${IMG}/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['anti-aging', 'skin', 'collagen', 'wound healing'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/ghk-cu/`,
@@ -227,7 +229,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '0.25-2.4mg once weekly',
     halfLife: '7 days',
-    image: '/images/semaglutide.svg',
+    image: `${IMG}/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['GLP-1', 'metabolic', 'weight management', 'diabetes research'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/semaglutide/`,
@@ -251,7 +253,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '2.5-15mg once weekly',
     halfLife: '5 days',
-    image: '/images/tirzepatide.svg',
+    image: `${IMG}/photo-1579154341098-e4e158cc7f55?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['GIP', 'GLP-1', 'metabolic', 'dual agonist'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/tirzepatide/`,
@@ -275,7 +277,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '300mcg daily, fasted',
     halfLife: '30-60 minutes',
-    image: '/images/aod-9604.svg',
+    image: `${IMG}/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['fat loss', 'metabolic', 'HGH fragment'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/aod-9604/`,
@@ -299,7 +301,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     dosage: '250-500mcg 2x daily, fasted',
     halfLife: '30 minutes',
-    image: '/images/hgh-fragment.svg',
+    image: `${IMG}/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=600&q=80`,
     tags: ['fat loss', 'lipolysis', 'HGH fragment', 'metabolic'],
     vendorUrls: {
       peptidesciences: `${VENDOR_BASE.peptidesciences}/hgh-fragment-176-191/`,
