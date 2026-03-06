@@ -49,39 +49,33 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero — static fallback */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 25% 25%, white 0%, transparent 50%), radial-gradient(circle at 75% 75%, white 0%, transparent 50%)'
-          }} />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <div className="hero-badge">
+              <span className="hero-pulse" />
               Lab-Tested • Certificate of Analysis Included
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
               {site.tagline}
             </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
               {site.description} All products are strictly for research purposes only.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white font-semibold rounded-xl transition-colors hover:bg-gray-100"
-                style={{ color: 'var(--primary)' }}
+                className="btn btn-lg bg-white text-primary hover:bg-gray-100"
               >
                 Browse Products
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
               <Link
                 href="/guides"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl border border-white/30 hover:bg-white/20 transition-colors"
+                className="btn btn-lg glass-dark text-white border-white/30 hover:bg-white/20"
               >
                 Research Guides
               </Link>
@@ -90,24 +84,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Trust signals */}
-      <section className="bg-white border-b border-gray-200 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-sm text-gray-600">
-            {[
-              { icon: '🔬', text: 'Third-Party Lab Tested' },
-              { icon: '📋', text: 'COA on Every Order' },
-              { icon: '🚚', text: 'Fast US Shipping' },
-              { icon: '💳', text: 'Secure Checkout' },
-              { icon: '✅', text: '99%+ Purity Standard' },
-            ].map(({ icon, text }) => (
-              <div key={text} className="flex items-center gap-2 font-medium">
-                <span>{icon}</span>
-                <span>{text}</span>
-              </div>
-            ))}
+      {/* Trust Bar */}
+      <section className="trust-bar">
+        {[
+          { icon: '🔬', text: 'Third-Party Lab Tested' },
+          { icon: '📋', text: 'COA on Every Order' },
+          { icon: '🚚', text: 'Fast US Shipping' },
+          { icon: '💳', text: 'Secure Checkout' },
+          { icon: '✅', text: '99%+ Purity Standard' },
+        ].map(({ icon, text }) => (
+          <div key={text} className="trust-item">
+            <span className="trust-item-icon">{icon}</span>
+            <span>{text}</span>
           </div>
-        </div>
+        ))}
       </section>
 
       {/* Featured Products */}

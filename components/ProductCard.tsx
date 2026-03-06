@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Product } from '@/lib/products'
 import BuyButton from './BuyButton'
 
@@ -8,52 +9,94 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
-      {/* Category badge */}
-      <div className="px-4 pt-4">
-        <span
-          className="inline-block px-2 py-1 rounded-full text-xs font-medium text-white"
-          style={{ backgroundColor: 'var(--primary)' }}
-        >
+    <div className="product-card">
+      {/* Product Image */}
+      <div className="product-card-image">
+        <Link href={`/products/${product.slug}`}>
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={400}
+            height={300}
+            className="w-full h-full object-cover"
+            priority={product.featured}
+          />
+        </Link>
+        
+        {/* Category Badge */}
+        <div className="product-card-badge">
           {product.category}
-        </span>
+        </div>
+        
+        {/* Featured indicator */}
+        {product.featured && (
+          <div className="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+            ⭐ Popular
+          </div>
+        )}
       </div>
 
       {/* Content */}
-      <div className="p-4 flex-1 flex flex-col">
-        <Link href={`/products/${product.slug}`}>
-          <h3 className="font-bold text-lg text-gray-900 hover:text-[--primary] transition-colors mb-1">
+      <div className="p-5 flex flex-col flex-1">
+        <Link href={`/products/${product.slug}`} className="group">
+          <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary transition-colors mb-2">
             {product.name}
           </h3>
         </Link>
-        <p className="text-sm text-gray-600 mb-3 flex-1">{product.description}</p>
+        
+        <p className="text-sm text-gray-600 mb-4 flex-1 line-clamp-2">
+          {product.description}
+        </p>
 
-        {/* Benefits preview */}
-        <ul className="space-y-1 mb-4">
+        {/* Benefits preview - top 3 */}
+        <ul className="space-y-2 mb-4">
           {product.benefits.slice(0, 3).map((benefit) => (
-            <li key={benefit} className="flex items-start gap-2 text-xs text-gray-600">
-              <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <li key={benefit} className="flex items-start gap-2 text-xs text-gray-700">
+              <svg 
+                className="w-4 h-4 mt-0.5 flex-shrink-0 text-emerald-500" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
+              >
+                <path 
+                  fillRule="evenodd" 
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" 
+                  clipRule="evenodd" 
+                />
               </svg>
-              {benefit}
+              <span className="leading-tight">{benefit}</span>
             </li>
           ))}
         </ul>
 
-        {/* Dosage */}
-        <div className="text-xs text-gray-500 mb-4 p-2 bg-gray-50 rounded-lg">
-          <span className="font-medium">Dosage: </span>{product.dosage}
+        {/* Dosage info */}
+        <div className="info-box mb-4 py-2.5 px-3">
+          <div className="text-xs">
+            <span className="font-semibold text-gray-700">Dosage: </span>
+            <span className="text-gray-600">{product.dosage}</span>
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {product.tags.slice(0, 3).map((tag) => (
+            <span 
+              key={tag} 
+              className="badge badge-outline text-[10px] px-2 py-1"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
 
         {/* Actions */}
         <div className="flex gap-2 mt-auto">
           <Link
             href={`/products/${product.slug}`}
-            className="flex-1 text-center px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="btn btn-outline btn-sm flex-1"
           >
             Learn More
           </Link>
-          <BuyButton product={product} className="flex-1" />
+          <BuyButton product={product} className="flex-1" size="sm" />
         </div>
       </div>
     </div>
