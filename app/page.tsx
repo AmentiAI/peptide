@@ -49,35 +49,37 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10">
-          <div className="max-w-3xl">
+      {/* 2026 Ultra-Modern Hero */}
+      <section className="hero-2026">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content">
+          <div className="max-w-4xl">
             <div className="hero-badge">
               <span className="hero-pulse" />
-              Lab-Tested • Certificate of Analysis Included
+              Third-Party Lab Tested • Certificate of Analysis Included
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-              {site.tagline}
+            
+            <h1 className="hero-title">
+              Premium Research Peptides
+              <br />
+              <span className="gradient-text">For Scientific Discovery</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
-              {site.description} All products are strictly for research purposes only.
+            
+            <p className="hero-subtitle">
+              {site.description || "Access pharmaceutical-grade research peptides with verified 99%+ purity. Every batch includes independent third-party testing and Certificate of Analysis."}
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/products"
-                className="btn btn-lg bg-white text-primary hover:bg-gray-100"
-              >
+            
+            <div className="hero-cta">
+              <Link href="/products" className="btn btn-primary btn-lg">
                 Browse Products
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
-              <Link
-                href="/guides"
-                className="btn btn-lg glass-dark text-white border-white/30 hover:bg-white/20"
-              >
+              <Link href="/guides" className="btn btn-glass btn-lg">
                 Research Guides
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -88,109 +90,230 @@ export default async function HomePage() {
       <section className="trust-bar">
         {[
           { icon: '🔬', text: 'Third-Party Lab Tested' },
+          { icon: '✓', text: '99%+ Purity Verified' },
           { icon: '📋', text: 'COA on Every Order' },
-          { icon: '🚚', text: 'Fast US Shipping' },
-          { icon: '💳', text: 'Secure Checkout' },
-          { icon: '✅', text: '99%+ Purity Standard' },
+          { icon: '🚚', text: 'Fast Discreet Shipping' },
+          { icon: '🔒', text: 'Secure Checkout' },
         ].map(({ icon, text }) => (
           <div key={text} className="trust-item">
-            <span className="trust-item-icon">{icon}</span>
+            <div className="trust-icon">{icon}</div>
             <span>{text}</span>
           </div>
         ))}
       </section>
 
-      {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Featured Research Peptides</h2>
-            <p className="text-gray-600 mt-1">Most popular compounds for research applications</p>
+      {/* Featured Products - Bento Grid */}
+      <section className="section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="section-header">
+            <h2 className="section-title">Featured Research Peptides</h2>
+            <p className="section-subtitle">
+              Pharmaceutical-grade compounds for advanced research applications
+            </p>
           </div>
-          <Link
-            href="/products"
-            className="text-sm font-medium hover:underline"
-            style={{ color: 'var(--primary)' }}
-          >
-            View all →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURED_PRODUCTS.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURED_PRODUCTS.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link href="/products" className="btn btn-primary btn-lg hover-lift">
+              View All Products
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* About / Info section */}
-      <section className="bg-white border-y border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Why Researchers Choose {site.name}
-              </h2>
-              <p className="text-gray-600 mb-6">
-                We curate the highest-quality peptide vendors with verified purity standards. Every product listed
-                comes with a Certificate of Analysis from independent third-party laboratories.
+      {/* Why Choose Us - Bento Grid */}
+      <section className="section bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="section-header">
+            <h2 className="section-title">Why Researchers Choose Us</h2>
+            <p className="section-subtitle">
+              Premium quality, transparent testing, and scientific excellence
+            </p>
+          </div>
+          
+          <div className="bento-grid">
+            {/* Feature Card 1 - Large */}
+            <div className="bento-feature">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-3xl font-bold mb-2">99%+ Purity</h3>
+                  <p className="text-white/80 text-lg">Every single batch tested</p>
+                </div>
+                <div className="text-6xl">🔬</div>
+              </div>
+              <p className="text-white/90 mb-6">
+                Independent third-party laboratory testing on every batch ensures pharmaceutical-grade quality. 
+                HPLC, mass spectrometry, and purity verification included.
               </p>
-              <ul className="space-y-3">
-                {[
-                  'Vendors vetted for manufacturing quality',
-                  'Independent lab verification on all batches',
-                  'Detailed research guides and dosage information',
-                  'Transparent affiliate relationships disclosed',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <div
-                      className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ backgroundColor: 'var(--primary)' }}
-                    >
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <Link href="/testing" className="inline-flex items-center gap-2 text-white font-semibold hover:gap-3 transition-all">
+                View Testing Process
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <div className="text-center mb-6">
-                <div className="text-4xl font-extrabold" style={{ color: 'var(--primary)' }}>99%+</div>
-                <div className="text-gray-600 font-medium">Average Purity</div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="bg-white rounded-xl p-4 border border-gray-200">
-                  <div className="text-2xl font-bold text-gray-900">12+</div>
-                  <div className="text-xs text-gray-500 mt-1">Research Compounds</div>
-                </div>
-                <div className="bg-white rounded-xl p-4 border border-gray-200">
-                  <div className="text-2xl font-bold text-gray-900">COA</div>
-                  <div className="text-xs text-gray-500 mt-1">Every Batch</div>
-                </div>
-              </div>
+
+            {/* Feature Card 2 */}
+            <div className="bento-card">
+              <div className="text-4xl mb-4">📋</div>
+              <h3 className="text-xl font-bold mb-2">Certificate of Analysis</h3>
+              <p className="text-gray-600">
+                Every order includes a detailed COA from independent laboratories showing exact purity levels and composition.
+              </p>
+            </div>
+
+            {/* Feature Card 3 */}
+            <div className="bento-card">
+              <div className="text-4xl mb-4">🚚</div>
+              <h3 className="text-xl font-bold mb-2">Fast Shipping</h3>
+              <p className="text-gray-600">
+                Discreet packaging with expedited shipping options available. Track your order every step of the way.
+              </p>
+            </div>
+
+            {/* Feature Card 4 */}
+            <div className="bento-card">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold mb-2">Secure & Private</h3>
+              <p className="text-gray-600">
+                Bank-level encryption, secure payment processing, and complete privacy protection for all orders.
+              </p>
+            </div>
+
+            {/* Feature Card 5 */}
+            <div className="bento-card">
+              <div className="text-4xl mb-4">📚</div>
+              <h3 className="text-xl font-bold mb-2">Research Guides</h3>
+              <p className="text-gray-600">
+                Comprehensive guides covering mechanisms of action, protocols, and latest research studies.
+              </p>
+            </div>
+
+            {/* Feature Card 6 */}
+            <div className="bento-card">
+              <div className="text-4xl mb-4">💳</div>
+              <h3 className="text-xl font-bold mb-2">Multiple Payment Options</h3>
+              <p className="text-gray-600">
+                Credit cards, cryptocurrency, and secure payment gateways accepted for your convenience.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Research Guides CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="rounded-2xl p-8 md:p-12 text-center" style={{ backgroundColor: 'var(--primary)' }}>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+      {/* Stats Section */}
+      <section className="section section-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="animate-in">
+              <div className="text-5xl font-black mb-2">99%+</div>
+              <div className="text-white/80 font-medium">Average Purity</div>
+            </div>
+            <div className="animate-in" style={{ animationDelay: '0.1s' }}>
+              <div className="text-5xl font-black mb-2">12+</div>
+              <div className="text-white/80 font-medium">Research Peptides</div>
+            </div>
+            <div className="animate-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-5xl font-black mb-2">100%</div>
+              <div className="text-white/80 font-medium">Lab Tested</div>
+            </div>
+            <div className="animate-in" style={{ animationDelay: '0.3s' }}>
+              <div className="text-5xl font-black mb-2">24/7</div>
+              <div className="text-white/80 font-medium">Support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Categories */}
+      <section className="section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="section-header">
+            <h2 className="section-title">Browse by Category</h2>
+            <p className="section-subtitle">
+              Find the perfect research peptide for your specific application
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { name: 'Healing & Recovery', icon: '💊', count: 2, gradient: 'from-blue-500 to-cyan-500' },
+              { name: 'Growth Hormone', icon: '📈', count: 3, gradient: 'from-purple-500 to-pink-500' },
+              { name: 'Metabolic', icon: '⚡', count: 3, gradient: 'from-green-500 to-yellow-500' },
+              { name: 'Anti-Aging', icon: '🧬', count: 1, gradient: 'from-orange-500 to-red-500' },
+              { name: 'Immune Support', icon: '🛡️', count: 1, gradient: 'from-teal-500 to-cyan-500' },
+              { name: 'Nootropic', icon: '🧠', count: 2, gradient: 'from-indigo-500 to-violet-500' },
+            ].map((category) => (
+              <Link
+                key={category.name}
+                href={`/products?category=${category.name.toLowerCase().replace(/ /g, '-')}`}
+                className="glass-card hover-lift hover-glow group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`text-5xl w-16 h-16 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center transform group-hover:scale-110 transition-transform`}>
+                    {category.icon}
+                  </div>
+                  <div className="text-sm font-bold text-gray-400">
+                    {category.count} {category.count === 1 ? 'Product' : 'Products'}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-2">{category.name}</h3>
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-600 group-hover:text-purple-600 transition-colors">
+                  Explore Category
+                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section section-gradient">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             New to Research Peptides?
           </h2>
-          <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-            Read our in-depth research guides covering mechanisms of action, dosing protocols, and the latest studies.
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Start with our comprehensive guides covering mechanisms of action, research protocols, and safety guidelines.
           </p>
-          <Link
-            href="/guides"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white font-semibold rounded-xl hover:bg-gray-100 transition-colors"
-            style={{ color: 'var(--primary)' }}
-          >
-            Browse Research Guides
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/guides" className="btn btn-primary btn-lg">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              Read Research Guides
+            </Link>
+            <Link href="/products" className="btn btn-glass btn-lg">
+              Browse Products
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Trust Section */}
+      <section className="section bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card text-center max-w-3xl mx-auto">
+            <div className="text-6xl mb-6">🔬</div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Research Use Only
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              All products are strictly for laboratory research purposes only. Not for human consumption or therapeutic use. 
+              By purchasing, you acknowledge that you are a qualified researcher operating within applicable regulations.
+            </p>
+          </div>
         </div>
       </section>
     </>
