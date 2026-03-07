@@ -17,7 +17,7 @@ export default function Header({ site }: HeaderProps) {
     { href: '/products', label: 'Products' },
     { href: '/stacks', label: 'Stacks' },
     { href: '/guides', label: 'Blog', badge: 'New' },
-    { href: '/compare/bpc-157-vs-tb-500', label: 'Compare' },
+    { href: '/compare', label: 'Compare' },
     { href: '/faq', label: 'FAQ' },
   ]
 
