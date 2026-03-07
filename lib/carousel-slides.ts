@@ -1,6 +1,9 @@
 import type { CarouselSlide } from '@/components/HeroCarousel'
 
 const BASE = 'https://images.unsplash.com'
+const PP09 = 'https://pantheonpeptides.com/wp-content/uploads/2024/09'
+const PP10 = 'https://pantheonpeptides.com/wp-content/uploads/2024/10'
+const PP12 = 'https://pantheonpeptides.com/wp-content/uploads/2024/12'
 
 export const HOME_SLIDES: CarouselSlide[] = [
   {
@@ -97,18 +100,25 @@ export const GUIDES_SLIDES: CarouselSlide[] = [
   },
 ]
 
-// Per-product image map — Unsplash photos
+// Per-product image map — Pantheon Peptides product images
 export const PRODUCT_IMAGES: Record<string, string> = {
-  'bpc-157':             `${BASE}/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&h=600&q=80`,
-  'tb-500':              `${BASE}/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&h=600&q=80`,
-  'cjc-1295-dac':        `${BASE}/photo-1631651363775-dba8c9c86c55?auto=format&fit=crop&w=800&h=600&q=80`,
-  'ipamorelin':          `${BASE}/photo-1576671081837-49000212a223?auto=format&fit=crop&w=800&h=600&q=80`,
-  'sermorelin':          `${BASE}/photo-1582560475093-ba66accbc424?auto=format&fit=crop&w=800&h=600&q=80`,
-  'melanotan-2':         `${BASE}/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&h=600&q=80`,
-  'pt-141':              `${BASE}/photo-1576091160400-b7be5f35a2bb?auto=format&fit=crop&w=800&h=600&q=80`,
-  'ghk-cu':              `${BASE}/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&h=600&q=80`,
-  'semaglutide':         `${BASE}/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&h=600&q=80`,
-  'tirzepatide':         `${BASE}/photo-1579154341098-e4e158cc7f55?auto=format&fit=crop&w=800&h=600&q=80`,
-  'aod-9604':            `${BASE}/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&h=600&q=80`,
-  'hgh-fragment-176-191':`${BASE}/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=600&q=80`,
+  'bpc-157':          `${PP09}/BPC-157-2mg-scaled.jpg`,
+  'tb-500':           `${PP09}/TD-500-2mg-scaled.jpg`,
+  'cjc-1295':         `${PP09}/CJC1295-2mg-scaled.jpg`,
+  'ipamorelin':       `${PP09}/IPAMORELIN-2mg-scaled.jpg`,
+  'sermorelin':       `${PP09}/SERMORELIN-2mg-scaled.jpg`,
+  'pt-141':           `${PP09}/PT141-10mg-scaled.jpg`,
+  'ghk-cu':           `${PP09}/GHKCU-50mg-scaled.jpg`,
+  'tirzepatide':      `${PP09}/TIRZEPTIDE-5mg-scaled.jpg`,
+  'mt-2':             `${PP09}/MT2-10mg-scaled.jpg`,
+  'semax':            `${PP09}/SEMAX-10mg-scaled.jpg`,
+  'mots-c':           `${PP09}/MOTSC-10mg-scaled.jpg`,
+  'tesamorelin':      `${PP09}/TESAMORELIN-2mg-scaled.jpg`,
+  'thymosin-alpha-1': `${PP09}/THYMOSIN-ALPHA1-2mg-1-scaled.jpg`,
+  'epithalon':        `${PP09}/EPITALON-10mg-scaled.jpg`,
+  'selank':           `${PP09}/SELANK-5mg-scaled.jpg`,
+  'kisspeptin-10':    `${PP09}/KISSPEPTINE-5mg-scaled.jpg`,
+  'mk-677':           `${PP12}/MK-677-15mg-Oral-1.jpg`,
+  'll-37':            `${PP10}/LL37-5mg-scaled.jpg`,
+  '5-amino-1mq':      `${PP10}/5-AMINO-1MQ-5mg-scaled.jpg`,
 }

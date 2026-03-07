@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getGuide as getGuideFromFS, getGuides as getGuidesFromFS } from '@/lib/guides'
 import { getGuide as getGuideFromDB } from '@/lib/db-guides'
 import { PRODUCTS } from '@/lib/products'
+import { getSiteFromHeaders } from '@/lib/sites'
 import BuyButton from '@/components/BuyButton'
 
 interface Props {
@@ -18,17 +20,48 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
+  const headersList = await headers()
+  const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
+
   const dbGuide = await getGuideFromDB(slug).catch(() => null)
-  if (dbGuide) return { title: dbGuide.title, description: dbGuide.description }
+  if (dbGuide) {
+    return {
+      title: dbGuide.title,
+      description: dbGuide.description,
+      alternates: { canonical: `${baseUrl}/guides/${slug}` },
+      openGraph: {
+        title: dbGuide.title,
+        description: dbGuide.description,
+        type: 'article',
+        url: `${baseUrl}/guides/${slug}`,
+      },
+      twitter: { card: 'summary_large_image', title: dbGuide.title, description: dbGuide.description },
+    }
+  }
   const guide = await getGuideFromFS(slug).catch(() => null)
   if (!guide) return {}
-  return { title: guide.frontmatter.title, description: guide.frontmatter.description }
+  return {
+    title: guide.frontmatter.title,
+    description: guide.frontmatter.description,
+    alternates: { canonical: `${baseUrl}/guides/${slug}` },
+    openGraph: {
+      title: guide.frontmatter.title,
+      description: guide.frontmatter.description,
+      type: 'article',
+      url: `${baseUrl}/guides/${slug}`,
+    },
+    twitter: { card: 'summary_large_image', title: guide.frontmatter.title, description: guide.frontmatter.description },
+  }
 }
 
 const mdxComponents = { BuyButton }
 
 export default async function GuidePage({ params }: Props) {
   const { slug } = await params
+  const headersList = await headers()
+  const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
 
   // Try DB first
   const dbGuide = await getGuideFromDB(slug).catch(() => null)
@@ -37,7 +70,21 @@ export default async function GuidePage({ params }: Props) {
       .map((s) => PRODUCTS[s])
       .filter(Boolean)
 
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: dbGuide.title,
+      description: dbGuide.description,
+      author: { '@type': 'Organization', name: site.name },
+      publisher: { '@type': 'Organization', name: site.name },
+      datePublished: dbGuide.publishedAt?.toISOString(),
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${baseUrl}/guides/${slug}` },
+      keywords: dbGuide.tags.join(', '),
+    }
+
     return (
+      <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:text-gray-900">Home</Link>
@@ -84,6 +131,7 @@ export default async function GuidePage({ params }: Props) {
           )}
         </article>
       </div>
+      </>
     )
   }
 
@@ -96,7 +144,21 @@ export default async function GuidePage({ params }: Props) {
     ? frontmatter.relatedProducts.map((s: string) => PRODUCTS[s]).filter(Boolean)
     : []
 
+  const fsJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    author: { '@type': 'Organization', name: site.name },
+    publisher: { '@type': 'Organization', name: site.name },
+    datePublished: frontmatter.date,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${baseUrl}/guides/${slug}` },
+    keywords: frontmatter.tags?.join(', '),
+  }
+
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(fsJsonLd) }} />
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:text-gray-900">Home</Link>
@@ -143,5 +205,6 @@ export default async function GuidePage({ params }: Props) {
         )}
       </article>
     </div>
+    </>
   )
 }

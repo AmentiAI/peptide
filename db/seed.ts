@@ -12,7 +12,7 @@ const SITES_DATA = [
     description: 'Your trusted source for high-purity research peptides. Lab-tested, certificate of analysis included.',
     primaryColor: '#0f4c81',
     accentColor: '#1a73e8',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'peptidevault',
     baseUrl: 'https://peptidevault.com',
   },
@@ -23,7 +23,7 @@ const SITES_DATA = [
     description: 'High-quality research peptides with verified purity. Trusted by laboratories worldwide.',
     primaryColor: '#1b4332',
     accentColor: '#40916c',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'researchpeps',
     baseUrl: 'https://researchpeps.com',
   },
@@ -34,7 +34,7 @@ const SITES_DATA = [
     description: 'Reliable peptide supply for research professionals. Competitive pricing and fast shipping.',
     primaryColor: '#7b2d8b',
     accentColor: '#ab47bc',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'peptidesource',
     baseUrl: 'https://peptidesource.net',
   },
@@ -45,7 +45,7 @@ const SITES_DATA = [
     description: 'Premium research peptides for serious scientists. Industry-leading purity standards.',
     primaryColor: '#b71c1c',
     accentColor: '#ef5350',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'alpharesearch',
     baseUrl: 'https://alpharesearchpeptides.com',
   },
@@ -56,7 +56,7 @@ const SITES_DATA = [
     description: 'Pharmaceutical-grade peptides for research applications. Third-party tested purity.',
     primaryColor: '#004d6e',
     accentColor: '#0288d1',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'labgrade',
     baseUrl: 'https://labgradepeptides.com',
   },
@@ -67,195 +67,45 @@ const SITES_DATA = [
     description: 'Uncompromising purity standards for research peptide compounds. COA on every product.',
     primaryColor: '#1a237e',
     accentColor: '#3f51b5',
-    vendor: 'peptidesciences',
+    vendor: 'pantheon',
     affiliateId: 'purepeptide',
     baseUrl: 'https://purepeptidelab.com',
   },
 ]
 
-const IMG = 'https://images.unsplash.com'
+const PP = 'https://pantheonpeptides.com'
+const AFFILIATE = '?partner=AmentiAI'
+const IMG09 = 'https://pantheonpeptides.com/wp-content/uploads/2024/09'
+const IMG10 = 'https://pantheonpeptides.com/wp-content/uploads/2024/10'
+const IMG12 = 'https://pantheonpeptides.com/wp-content/uploads/2024/12'
 
 const PRODUCTS_DATA = [
-  {
-    slug: 'bpc-157',
-    name: 'BPC-157',
-    shortName: 'BPC-157',
-    category: 'Healing & Recovery',
-    description: 'Body Protection Compound 157 — one of the most studied healing peptides.',
-    longDescription: 'BPC-157 (Body Protection Compound 157) is a pentadecapeptide derived from a protective gastric juice protein. It has been extensively studied for its remarkable regenerative properties, promoting healing of tendons, ligaments, muscles, and gut tissue.',
-    benefits: ['Accelerated tendon and ligament healing', 'Gut health and mucosal protection', 'Anti-inflammatory effects', 'Improved wound healing', 'Neuroprotective properties'],
-    dosage: '250-500mcg per day, subcutaneous or intramuscular injection',
-    halfLife: '4 hours',
-    imageUrl: `${IMG}/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['healing', 'recovery', 'gut health', 'tendon'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/bpc-157/' },
-    featured: true,
-  },
-  {
-    slug: 'tb-500',
-    name: 'TB-500',
-    shortName: 'TB-500',
-    category: 'Healing & Recovery',
-    description: 'Thymosin Beta-4 fragment — promotes healing, flexibility, and regeneration.',
-    longDescription: 'TB-500 is a synthetic fraction of the naturally occurring protein Thymosin Beta-4. It plays a critical role in building new blood vessels, muscle tissue, and cell migration and proliferation.',
-    benefits: ['Promotes muscle fiber growth', 'Speeds up wound healing', 'Reduces inflammation', 'Improves flexibility', 'Supports cardiovascular health'],
-    dosage: '2-2.5mg twice per week',
-    halfLife: 'Unknown, estimated days',
-    imageUrl: `${IMG}/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['healing', 'recovery', 'muscle', 'injury'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/tb-500/' },
-    featured: true,
-  },
-  {
-    slug: 'cjc-1295-dac',
-    name: 'CJC-1295 DAC',
-    shortName: 'CJC-1295',
-    category: 'Growth Hormone',
-    description: 'Growth hormone releasing hormone analog with extended half-life via DAC technology.',
-    longDescription: 'CJC-1295 DAC is a synthetic analog of growth hormone-releasing hormone (GHRH). The Drug Affinity Complex (DAC) technology extends its half-life significantly.',
-    benefits: ['Increased growth hormone secretion', 'Enhanced fat metabolism', 'Improved muscle mass', 'Better sleep quality', 'Anti-aging effects'],
-    dosage: '1-2mg per week',
-    halfLife: '6-8 days (with DAC)',
-    imageUrl: `${IMG}/photo-1631651363775-dba8c9c86c55?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['growth hormone', 'GHRH', 'anti-aging', 'body composition'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/cjc-1295-with-dac/' },
-    featured: true,
-  },
-  {
-    slug: 'ipamorelin',
-    name: 'Ipamorelin',
-    shortName: 'Ipamorelin',
-    category: 'Growth Hormone',
-    description: 'Selective growth hormone secretagogue with minimal side effects.',
-    longDescription: 'Ipamorelin is a selective growth hormone secretagogue and ghrelin receptor agonist. It stimulates growth hormone release with high selectivity.',
-    benefits: ['Selective GH release', 'Minimal cortisol elevation', 'Improved sleep', 'Fat loss support', 'Lean muscle preservation'],
-    dosage: '200-300mcg 2-3x daily',
-    halfLife: '2 hours',
-    imageUrl: `${IMG}/photo-1576671081837-49000212a223?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['growth hormone', 'secretagogue', 'anti-aging'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/ipamorelin/' },
-    featured: true,
-  },
-  {
-    slug: 'sermorelin',
-    name: 'Sermorelin',
-    shortName: 'Sermorelin',
-    category: 'Growth Hormone',
-    description: 'GHRH analog that stimulates natural growth hormone production.',
-    longDescription: 'Sermorelin is a synthetic analog of growth hormone-releasing hormone (GHRH). It stimulates the pituitary gland to produce and secrete growth hormone naturally.',
-    benefits: ['Natural GH stimulation', 'Improved body composition', 'Enhanced energy levels', 'Better sleep quality', 'Bone density support'],
-    dosage: '200-500mcg before bed',
-    halfLife: '10-20 minutes',
-    imageUrl: `${IMG}/photo-1582560475093-ba66accbc424?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['growth hormone', 'GHRH', 'anti-aging'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/sermorelin/' },
-    featured: false,
-  },
-  {
-    slug: 'melanotan-2',
-    name: 'Melanotan II',
-    shortName: 'MT-2',
-    category: 'Melanocortin',
-    description: 'Melanocortin receptor agonist studied for tanning and libido effects.',
-    longDescription: 'Melanotan II is a synthetic analog of the naturally occurring melanocortin peptide alpha-MSH. It acts on melanocortin receptors.',
-    benefits: ['Skin pigmentation enhancement', 'Libido support', 'Appetite suppression', 'UV protection research'],
-    dosage: '0.5-1mg as needed',
-    halfLife: '33-36 hours',
-    imageUrl: `${IMG}/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['melanocortin', 'tanning', 'libido'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/melanotan-2/' },
-    featured: false,
-  },
-  {
-    slug: 'pt-141',
-    name: 'PT-141',
-    shortName: 'PT-141',
-    category: 'Melanocortin',
-    description: 'Bremelanotide — melanocortin agonist studied for sexual function.',
-    longDescription: 'PT-141 (Bremelanotide) is a cyclic heptapeptide melanocortin agonist. Unlike other sexual function peptides, it acts centrally through the nervous system.',
-    benefits: ['Sexual function support', 'Central nervous system action', 'Works for both sexes in research', 'No cardiovascular mechanism'],
-    dosage: '1-2mg as needed, 45 min before',
-    halfLife: '2.7 hours',
-    imageUrl: `${IMG}/photo-1576091160400-b7be5f35a2bb?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['melanocortin', 'sexual health', 'libido'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/pt-141-bremelanotide/' },
-    featured: false,
-  },
-  {
-    slug: 'ghk-cu',
-    name: 'GHK-Cu',
-    shortName: 'GHK-Cu',
-    category: 'Anti-Aging',
-    description: 'Copper peptide with powerful anti-aging and wound healing properties.',
-    longDescription: 'GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. It promotes wound healing, attracts immune cells, and stimulates collagen synthesis.',
-    benefits: ['Collagen synthesis promotion', 'Wound healing acceleration', 'Anti-inflammatory effects', 'Antioxidant properties', 'Skin renewal support'],
-    dosage: '1-2mg per day topically or subcutaneously',
-    halfLife: 'Short, minutes in blood',
-    imageUrl: `${IMG}/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['anti-aging', 'skin', 'collagen', 'wound healing'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/ghk-cu/' },
-    featured: true,
-  },
-  {
-    slug: 'semaglutide',
-    name: 'Semaglutide',
-    shortName: 'Semaglutide',
-    category: 'Metabolic',
-    description: 'GLP-1 receptor agonist studied for metabolic health and weight management.',
-    longDescription: 'Semaglutide is a glucagon-like peptide-1 (GLP-1) receptor agonist. It mimics the action of the hormone GLP-1 which regulates insulin secretion and appetite.',
-    benefits: ['Appetite regulation', 'Blood glucose management', 'Weight management research', 'Cardiovascular research', 'Long-acting weekly dosing'],
-    dosage: '0.25-2.4mg once weekly',
-    halfLife: '7 days',
-    imageUrl: `${IMG}/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['GLP-1', 'metabolic', 'weight management', 'diabetes research'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/semaglutide/' },
-    featured: true,
-  },
-  {
-    slug: 'tirzepatide',
-    name: 'Tirzepatide',
-    shortName: 'Tirzepatide',
-    category: 'Metabolic',
-    description: 'Dual GIP/GLP-1 receptor agonist — next-generation metabolic research peptide.',
-    longDescription: 'Tirzepatide is a novel dual glucose-dependent insulinotropic polypeptide (GIP) and GLP-1 receptor agonist.',
-    benefits: ['Dual receptor activity', 'Enhanced metabolic effects', 'Appetite suppression research', 'Blood glucose regulation', 'Weekly administration'],
-    dosage: '2.5-15mg once weekly',
-    halfLife: '5 days',
-    imageUrl: `${IMG}/photo-1579154341098-e4e158cc7f55?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['GIP', 'GLP-1', 'metabolic', 'dual agonist'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/tirzepatide/' },
-    featured: true,
-  },
-  {
-    slug: 'aod-9604',
-    name: 'AOD-9604',
-    shortName: 'AOD-9604',
-    category: 'Metabolic',
-    description: 'HGH fragment analog studied for fat metabolism without growth effects.',
-    longDescription: 'AOD-9604 is a modified fragment of human growth hormone (HGH) spanning amino acids 176-191. It targets fat metabolism specifically.',
-    benefits: ['Fat metabolism research', 'No insulin resistance effects', 'No growth-promoting activity', 'Safe profile in research', 'Cartilage repair research'],
-    dosage: '300mcg daily, fasted',
-    halfLife: '30-60 minutes',
-    imageUrl: `${IMG}/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['fat loss', 'metabolic', 'HGH fragment'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/aod-9604/' },
-    featured: false,
-  },
-  {
-    slug: 'hgh-fragment-176-191',
-    name: 'HGH Fragment 176-191',
-    shortName: 'HGH Frag',
-    category: 'Metabolic',
-    description: 'C-terminal fragment of HGH studied for lipolysis and fat burning.',
-    longDescription: 'HGH Fragment 176-191 is a stabilized analog of the growth hormone-releasing factor encompassing amino acids 176-191.',
-    benefits: ['Targeted lipolysis', 'No effect on blood glucose', 'No promotion of cell growth', 'Potential anti-aging effects', 'Short acting, flexible dosing'],
-    dosage: '250-500mcg 2x daily, fasted',
-    halfLife: '30 minutes',
-    imageUrl: `${IMG}/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=600&q=80`,
-    tags: ['fat loss', 'lipolysis', 'HGH fragment', 'metabolic'],
-    vendorUrls: { peptidesciences: 'https://www.peptidesciences.com/hgh-fragment-176-191/' },
-    featured: false,
-  },
+  // Healing & Recovery
+  { slug: 'bpc-157', name: 'BPC-157', shortName: 'BPC-157', category: 'Healing & Recovery', description: 'Body Protection Compound 157 — one of the most studied healing peptides.', longDescription: 'BPC-157 is a pentadecapeptide derived from a protective gastric juice protein, extensively studied for regenerative properties promoting healing of tendons, ligaments, muscles, and gut tissue.', benefits: ['Accelerated tendon and ligament healing', 'Gut health and mucosal protection', 'Anti-inflammatory effects', 'Improved wound healing', 'Neuroprotective properties'], dosage: '250-500mcg per day', halfLife: '4 hours', imageUrl: `${IMG09}/BPC-157-2mg-scaled.jpg`, tags: ['healing', 'recovery', 'gut health', 'tendon'], vendorUrls: { pantheon: `${PP}/product/bpc-157/${AFFILIATE}` }, featured: true },
+  { slug: 'tb-500', name: 'TB-500', shortName: 'TB-500', category: 'Healing & Recovery', description: 'Thymosin Beta-4 fragment — promotes healing, flexibility, and regeneration.', longDescription: 'TB-500 is a synthetic fraction of Thymosin Beta-4, studied for building new blood vessels, muscle tissue, and cell migration and proliferation.', benefits: ['Promotes muscle fiber growth', 'Speeds up wound healing', 'Reduces inflammation', 'Improves flexibility', 'Supports cardiovascular health'], dosage: '2-2.5mg twice per week', halfLife: 'Unknown, estimated days', imageUrl: `${IMG09}/TD-500-2mg-scaled.jpg`, tags: ['healing', 'recovery', 'muscle', 'injury'], vendorUrls: { pantheon: `${PP}/product/tb-500/${AFFILIATE}` }, featured: true },
+  { slug: 'll-37', name: 'LL-37', shortName: 'LL-37', category: 'Healing & Recovery', description: 'Human cathelicidin antimicrobial peptide with immune modulation and wound healing properties.', longDescription: 'LL-37 is the only human cathelicidin antimicrobial peptide, studied for immune modulation, wound healing, and anti-inflammatory signaling.', benefits: ['Immune system support', 'Chronic inflammation reduction', 'Wound healing promotion', 'Gut health support', 'Antimicrobial activity'], dosage: '25-100mcg per injection site', halfLife: 'Minutes to hours', imageUrl: `${IMG10}/LL37-5mg-scaled.jpg`, tags: ['immune', 'healing', 'antimicrobial', 'inflammation'], vendorUrls: { pantheon: `${PP}/product/ll37/${AFFILIATE}` }, featured: false },
+  // Growth Hormone
+  { slug: 'cjc-1295', name: 'CJC-1295', shortName: 'CJC-1295', category: 'Growth Hormone', description: 'GHRH analog — stimulates natural GH production.', longDescription: 'CJC-1295 is a synthetic GHRH analog that stimulates the pituitary to produce more growth hormone with a physiological pulsatile release pattern.', benefits: ['Increased growth hormone secretion', 'Enhanced fat metabolism', 'Improved muscle mass', 'Better sleep quality', 'Anti-aging effects'], dosage: '100-200mcg 2-3x per week', halfLife: '30 minutes', imageUrl: `${IMG09}/CJC1295-2mg-scaled.jpg`, tags: ['growth hormone', 'GHRH', 'anti-aging', 'body composition'], vendorUrls: { pantheon: `${PP}/product/cjc-1295-without-dac/${AFFILIATE}` }, featured: true },
+  { slug: 'ipamorelin', name: 'Ipamorelin', shortName: 'Ipamorelin', category: 'Growth Hormone', description: 'Selective GH secretagogue with minimal side effects.', longDescription: 'Ipamorelin is a selective GH secretagogue and ghrelin receptor agonist, stimulating GH release with high selectivity and minimal cortisol elevation.', benefits: ['Selective GH release', 'Minimal cortisol elevation', 'Improved sleep', 'Fat loss support', 'Lean muscle preservation'], dosage: '200-300mcg 2-3x daily', halfLife: '2 hours', imageUrl: `${IMG09}/IPAMORELIN-2mg-scaled.jpg`, tags: ['growth hormone', 'secretagogue', 'anti-aging'], vendorUrls: { pantheon: `${PP}/product/ipamorelin/${AFFILIATE}` }, featured: true },
+  { slug: 'sermorelin', name: 'Sermorelin', shortName: 'Sermorelin', category: 'Growth Hormone', description: 'GHRH analog that stimulates natural GH production.', longDescription: 'Sermorelin is a synthetic GHRH analog that stimulates the pituitary to produce GH naturally, widely used in anti-aging research.', benefits: ['Natural GH stimulation', 'Improved body composition', 'Enhanced energy levels', 'Better sleep quality', 'Bone density support'], dosage: '200-500mcg before bed', halfLife: '10-20 minutes', imageUrl: `${IMG09}/SERMORELIN-2mg-scaled.jpg`, tags: ['growth hormone', 'GHRH', 'anti-aging'], vendorUrls: { pantheon: `${PP}/product/sermorelin-acetate/${AFFILIATE}` }, featured: false },
+  { slug: 'tesamorelin', name: 'Tesamorelin', shortName: 'Tesamorelin', category: 'Growth Hormone', description: 'GHRH analog with strong visceral fat reduction and metabolic data.', longDescription: 'Tesamorelin is a stabilized GHRH analog studied for visceral fat reduction and metabolic health improvements.', benefits: ['Reduces abdominal fat', 'Enhances metabolic function', 'Supports muscle maintenance', 'Improves skin elasticity', 'Enhances mental clarity'], dosage: '1-2mg daily', halfLife: '26-38 minutes', imageUrl: `${IMG09}/TESAMORELIN-2mg-scaled.jpg`, tags: ['growth hormone', 'GHRH', 'fat loss', 'metabolic'], vendorUrls: { pantheon: `${PP}/product/tesamorelin/${AFFILIATE}` }, featured: false },
+  { slug: 'mk-677', name: 'MK-677 (Ibutamoren)', shortName: 'MK-677', category: 'Growth Hormone', description: 'Oral GH secretagogue — stimulates GH and IGF-1 without injection.', longDescription: 'MK-677 is a non-peptide oral GH secretagogue that activates the ghrelin receptor for sustained GH and IGF-1 elevation.', benefits: ['Enhanced muscle growth and recovery', 'Improved bone density', 'Better sleep quality', 'Fat metabolism support', 'Oral administration'], dosage: '15-25mg orally per day', halfLife: '24 hours', imageUrl: `${IMG12}/MK-677-15mg-Oral-1.jpg`, tags: ['growth hormone', 'oral', 'secretagogue', 'body composition'], vendorUrls: { pantheon: `${PP}/product/mk-677-capsules/${AFFILIATE}` }, featured: false },
+  // Metabolic
+  { slug: 'tirzepatide', name: 'Tirzepatide', shortName: 'Tirzepatide', category: 'Metabolic', description: 'Dual GIP/GLP-1 receptor agonist for weight management and metabolic health research.', longDescription: 'Tirzepatide is a dual GIP and GLP-1 receptor agonist studied for weight management, diabetes control, and cardiovascular health.', benefits: ['Weight management research', 'Diabetes control studies', 'Cardiovascular health', 'Improved insulin sensitivity', 'Metabolic health optimization'], dosage: '2.5-15mg weekly subcutaneous', halfLife: '5 days', imageUrl: `${IMG09}/TIRZEPTIDE-5mg-scaled.jpg`, tags: ['metabolic', 'weight loss', 'GLP-1', 'GIP', 'diabetes'], vendorUrls: { pantheon: `${PP}/product/tirzeptide/${AFFILIATE}` }, featured: true },
+  { slug: 'mots-c', name: 'MOTS-C', shortName: 'MOTS-C', category: 'Metabolic', description: 'Mitochondria-derived peptide for metabolic regulation and longevity research.', longDescription: 'MOTS-C is a mitochondrial-derived peptide that activates AMPK signaling and promotes glucose metabolism through multiple pathways.', benefits: ['Enhances insulin sensitivity', 'Promotes glucose metabolism', 'Anti-inflammatory properties', 'Supports mitochondrial health', 'Longevity mechanisms'], dosage: '5-10mg 3x per week', halfLife: 'Unknown, estimated hours', imageUrl: `${IMG09}/MOTSC-10mg-scaled.jpg`, tags: ['metabolic', 'mitochondria', 'insulin', 'longevity'], vendorUrls: { pantheon: `${PP}/product/mots-c/${AFFILIATE}` }, featured: false },
+  { slug: '5-amino-1mq', name: '5-Amino-1MQ', shortName: '5-Amino-1MQ', category: 'Metabolic', description: 'NNMT inhibitor studied for fat loss and lean mass preservation.', longDescription: '5-Amino-1MQ is an NNMT inhibitor studied for its ability to promote fat loss while preserving lean muscle mass and improving insulin sensitivity.', benefits: ['Promotes fat loss', 'Supports weight management', 'Preserves lean muscle mass', 'Improves insulin sensitivity', 'Boosts cellular energy'], dosage: '50-100mg orally 1-3x daily', halfLife: 'Unknown', imageUrl: `${IMG10}/5-AMINO-1MQ-5mg-scaled.jpg`, tags: ['metabolic', 'fat loss', 'NNMT', 'weight management'], vendorUrls: { pantheon: `${PP}/product/5-amino-1mq/${AFFILIATE}` }, featured: false },
+  // Anti-Aging
+  { slug: 'ghk-cu', name: 'GHK-Cu', shortName: 'GHK-Cu', category: 'Anti-Aging', description: 'Copper peptide with powerful anti-aging and wound healing properties.', longDescription: 'GHK-Cu is a naturally occurring copper tripeptide studied for collagen synthesis, wound healing, antioxidant effects, and modulation of over 4,000 human genes.', benefits: ['Collagen synthesis promotion', 'Wound healing acceleration', 'Anti-inflammatory effects', 'Antioxidant properties', 'Skin renewal support'], dosage: '1-2mg per day topically or subcutaneously', halfLife: 'Short, minutes in blood', imageUrl: `${IMG09}/GHKCU-50mg-scaled.jpg`, tags: ['anti-aging', 'skin', 'collagen', 'wound healing'], vendorUrls: { pantheon: `${PP}/product/ghk-cu/${AFFILIATE}` }, featured: true },
+  { slug: 'epithalon', name: 'Epithalon', shortName: 'Epithalon', category: 'Anti-Aging', description: 'Tetrapeptide studied for telomere elongation and longevity mechanisms.', longDescription: 'Epithalon is a synthetic tetrapeptide derived from epithalamin, studied for telomerase stimulation, sleep quality improvement, and immune function.', benefits: ['Stimulates telomerase activity', 'Improves sleep quality', 'Supports immune function', 'Antioxidant properties', 'Anti-aging mechanisms'], dosage: '10mg daily for 10-20 day cycles', halfLife: 'Short, minutes to hours', imageUrl: `${IMG09}/EPITALON-10mg-scaled.jpg`, tags: ['anti-aging', 'telomere', 'longevity', 'sleep'], vendorUrls: { pantheon: `${PP}/product/epithalon/${AFFILIATE}` }, featured: false },
+  // Cognitive
+  { slug: 'semax', name: 'Semax', shortName: 'Semax', category: 'Cognitive', description: 'Neuropeptide analog studied for focus, memory, and neuroprotection.', longDescription: 'Semax is a synthetic ACTH heptapeptide analog studied for neuroprotective and nootropic effects, including focus, memory, and BDNF modulation.', benefits: ['Improves focus, memory, and clarity', 'Reduces mental fatigue', 'Neuroprotection and neuroregeneration', 'Antidepressant effects in research', 'Non-stimulant mechanism'], dosage: '100-600mcg intranasally or subcutaneously daily', halfLife: 'Minutes to hours', imageUrl: `${IMG09}/SEMAX-10mg-scaled.jpg`, tags: ['cognitive', 'nootropic', 'neuroprotection', 'focus', 'memory'], vendorUrls: { pantheon: `${PP}/product/semax/${AFFILIATE}` }, featured: false },
+  { slug: 'selank', name: 'Selank', shortName: 'Selank', category: 'Cognitive', description: 'Anxiolytic peptide studied for anxiety reduction, mood, and cognitive enhancement.', longDescription: 'Selank is a synthetic tuftsin analog studied for anxiolytic, nootropic, and immune-modulating properties without classical benzodiazepine side effects.', benefits: ['Reduces anxiety', 'Enhances cognitive function', 'Supports mood stabilization', 'Immune system support', 'Improves sleep quality'], dosage: '250-500mcg intranasally or subcutaneously 1-2x daily', halfLife: 'Minutes', imageUrl: `${IMG09}/SELANK-5mg-scaled.jpg`, tags: ['cognitive', 'anxiety', 'nootropic', 'mood'], vendorUrls: { pantheon: `${PP}/product/selank/${AFFILIATE}` }, featured: false },
+  // Immune
+  { slug: 'thymosin-alpha-1', name: 'Thymosin Alpha-1', shortName: 'TA-1', category: 'Immune', description: 'Thymic peptide studied for immune system enhancement and T-cell activation.', longDescription: 'Thymosin Alpha-1 is a 28-amino acid thymic peptide studied for immune modulation, T-cell maturation, and activation in immune deficiency and infection models.', benefits: ['Enhances immune function', 'Reduces chronic inflammation', 'Aids recovery from illness', 'Increases infection resistance', 'T-cell production stimulation'], dosage: '1.6mg subcutaneous 1-2x per week', halfLife: '2 hours', imageUrl: `${IMG09}/THYMOSIN-ALPHA1-2mg-1-scaled.jpg`, tags: ['immune', 'T-cell', 'thymus', 'inflammation'], vendorUrls: { pantheon: `${PP}/product/thymosin-alpha-1/${AFFILIATE}` }, featured: false },
+  // Melanocortin
+  { slug: 'pt-141', name: 'PT-141', shortName: 'PT-141', category: 'Melanocortin', description: 'Bremelanotide — melanocortin agonist studied for sexual function.', longDescription: 'PT-141 is a cyclic heptapeptide melanocortin agonist that acts centrally through the nervous system for sexual function research.', benefits: ['Sexual function support', 'Central nervous system action', 'Works for both sexes in research', 'No cardiovascular mechanism'], dosage: '1-2mg as needed', halfLife: '2.7 hours', imageUrl: `${IMG09}/PT141-10mg-scaled.jpg`, tags: ['melanocortin', 'sexual health', 'libido'], vendorUrls: { pantheon: `${PP}/product/pt-141/${AFFILIATE}` }, featured: false },
+  { slug: 'mt-2', name: 'Melanotan II (MT-2)', shortName: 'MT-2', category: 'Melanocortin', description: 'Melanocortin agonist studied for tanning, libido, and appetite regulation.', longDescription: 'MT-2 is a synthetic alpha-MSH analog studied for melanin stimulation, sexual function, and appetite regulation through MC1R/MC3R/MC4R activation.', benefits: ['Stimulates melanin production', 'Reduces sunburn risk', 'Enhances libido', 'Appetite suppression support', 'UV damage protection'], dosage: '0.5-1mg subcutaneous, titrate slowly', halfLife: '30-60 minutes', imageUrl: `${IMG09}/MT2-10mg-scaled.jpg`, tags: ['melanocortin', 'tanning', 'libido', 'pigmentation'], vendorUrls: { pantheon: `${PP}/product/mt-2-melanotan-2-acetate/${AFFILIATE}` }, featured: false },
+  { slug: 'kisspeptin-10', name: 'Kisspeptin-10', shortName: 'Kisspeptin-10', category: 'Melanocortin', description: 'Hypothalamic neuropeptide studied for reproductive hormone regulation and libido.', longDescription: 'Kisspeptin-10 is a hypothalamic neuropeptide that stimulates GnRH release, driving LH and FSH secretion for reproductive hormone regulation research.', benefits: ['Enhances libido in research models', 'Supports fertility research', 'Mood support through hormone balance', 'HPG axis regulation', 'LH and FSH stimulation'], dosage: '100-500mcg subcutaneous as needed', halfLife: 'Minutes to 1 hour', imageUrl: `${IMG09}/KISSPEPTINE-5mg-scaled.jpg`, tags: ['reproductive', 'hormone', 'libido', 'fertility'], vendorUrls: { pantheon: `${PP}/product/kisspeptin-10/${AFFILIATE}` }, featured: false },
 ]
 
 function defaultSections(siteId: number, siteName: string, tagline: string, primaryColor: string) {
@@ -301,7 +151,7 @@ function defaultSections(siteId: number, siteName: string, tagline: string, prim
       content: JSON.stringify({
         title: 'Featured Research Peptides',
         subtitle: 'Most popular compounds for research applications',
-        productSlugs: ['bpc-157', 'tb-500', 'cjc-1295-dac', 'ipamorelin', 'ghk-cu', 'semaglutide'],
+        productSlugs: ['bpc-157', 'tb-500', 'cjc-1295', 'ipamorelin', 'ghk-cu'],
       }),
     },
     {
@@ -342,7 +192,6 @@ async function seed() {
     `
     console.log(`  Site: ${siteData.domain} (id=${site.id})`)
 
-    // Seed default sections
     const sections = defaultSections(site.id, siteData.name, siteData.tagline, siteData.primaryColor)
     for (const section of sections) {
       await sql`
@@ -381,7 +230,7 @@ async function seed() {
     console.log(`  Product: ${p.slug}`)
   }
 
-  console.log('Assigning all products to all sites...')
+  console.log('Assigning products to all sites...')
 
   const allSites = await sql`SELECT id FROM sites`
   const allProducts = await sql`SELECT id, slug FROM products`
@@ -389,7 +238,7 @@ async function seed() {
   for (const site of allSites) {
     let pos = 0
     for (const product of allProducts) {
-      const isFeatured = ['bpc-157', 'tb-500', 'cjc-1295-dac', 'ipamorelin', 'ghk-cu', 'semaglutide', 'tirzepatide'].includes(product.slug)
+      const isFeatured = ['bpc-157', 'tb-500', 'cjc-1295', 'ipamorelin', 'ghk-cu', 'tirzepatide'].includes(product.slug)
       await sql`
         INSERT INTO site_products (site_id, product_id, is_featured, position, is_visible)
         VALUES (${site.id}, ${product.id}, ${isFeatured}, ${pos}, true)

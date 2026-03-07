@@ -11,6 +11,8 @@ import { FEATURED_PRODUCTS } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
 import HeroCarousel from '@/components/HeroCarousel'
 import { HOME_SLIDES } from '@/lib/carousel-slides'
+import StackSpotlight from '@/components/StackSpotlight'
+import HowItWorks from '@/components/HowItWorks'
 
 async function getSiteIdByDomain(host: string): Promise<number | null> {
   try {
@@ -179,6 +181,30 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* How It Works */}
+      <HowItWorks />
+
+      {/* Popular Research Stacks */}
+      <StackSpotlight />
+
+      {/* JSON-LD WebSite */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: site.name,
+            url: site.baseUrl,
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${site.baseUrl}/products`,
+              'query-input': 'required name=search_term_string',
+            },
+          }),
+        }}
+      />
     </>
   )
 }
