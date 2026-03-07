@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const site = getSiteFromHeaders(headersList)
   const baseUrl = site.baseUrl || 'https://peptidevault.com'
 
-  const title = `${product.name} Research Peptide — ${product.category} | ${site.name}`
+  const title = `${product.name} Research Peptide — ${product.category}`
   const description = `${product.description} Dosage: ${product.dosage}. Half-life: ${product.halfLife}. Lab-tested with Certificate of Analysis. For research use only.`
 
   return {

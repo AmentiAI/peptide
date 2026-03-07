@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `Disclaimer & Terms of Use | ${site.name}`,
+    title: `Disclaimer & Terms of Use`,
     description: `Legal disclaimer for ${site.name}. All research peptides on this site are for laboratory use only and not intended for human consumption or therapeutic use.`,
   }
 }

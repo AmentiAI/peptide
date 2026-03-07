@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = dbGuide?.description ?? (await getGuideFromFS(slug).catch(() => null))?.frontmatter.description ?? ''
 
   return {
-    title: `${title} | ${site.name} Research Blog`,
+    title: `${title} | Research Blog`,
     description,
     alternates: { canonical: `${baseUrl}/guides/${slug}` },
     openGraph: { title, description, type: 'article', url: `${baseUrl}/guides/${slug}` },

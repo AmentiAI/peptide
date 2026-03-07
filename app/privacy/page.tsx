@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `Privacy Policy | ${site.name}`,
+    title: `Privacy Policy`,
     description: `Privacy policy for ${site.name}. Learn how we collect, use, and protect your information.`,
   }
 }

@@ -7,14 +7,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `Frequently Asked Questions — Research Peptides | ${site.name}`,
+    title: `Frequently Asked Questions — Research Peptides`,
     description: `Answers to the most common questions about research peptides — purity standards, ordering, shipping, reconstitution, storage, and safety considerations.`,
     keywords: [
       'research peptide FAQ', 'peptide questions', 'how to buy peptides', 'peptide purity',
       'reconstitute peptides', 'peptide storage', 'peptide shipping', site.name,
     ],
     openGraph: {
-      title: `Research Peptide FAQ | ${site.name}`,
+      title: `Research Peptide FAQ`,
       description: 'Common questions about research peptides answered.',
       type: 'website',
     },

@@ -93,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `${cat.name} | ${site.name}`,
+    title: `${cat.name}`,
     description: cat.description,
     keywords: cat.keywords,
     openGraph: {

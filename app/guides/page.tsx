@@ -11,10 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const site = getSiteFromHeaders(headersList)
   const baseUrl = site.baseUrl || 'https://peptidevault.com'
   return {
-    title: `Research Blog & Peptide Guides | ${site.name}`,
+    title: `Research Blog & Peptide Guides`,
     description: `In-depth research guides on BPC-157, TB-500, CJC-1295, Tirzepatide, and more. Science-backed articles on peptide mechanisms, dosing, and stacking.`,
     alternates: { canonical: `${baseUrl}/guides` },
-    openGraph: { title: `Research Blog | ${site.name}`, type: 'website', url: `${baseUrl}/guides` },
+    openGraph: { title: `Research Blog`, type: 'website', url: `${baseUrl}/guides` },
   }
 }
 

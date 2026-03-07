@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `Research Peptide Stacks — Synergistic Combinations | ${site.name}`,
+    title: `Research Peptide Stacks — Synergistic Combinations`,
     description:
       'Explore the most researched peptide stacking protocols. The healing stack, GH optimization stack, anti-aging stack — with mechanisms, dosing guidance, and product links.',
     keywords: [
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'best peptide stack', 'peptide stacking guide',
     ],
     openGraph: {
-      title: `Peptide Research Stacks | ${site.name}`,
+      title: `Peptide Research Stacks`,
       description: 'The most researched synergistic peptide combinations.',
       type: 'website',
     },

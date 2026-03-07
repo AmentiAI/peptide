@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   return {
-    title: `${comp.title} | ${site.name}`,
+    title: `${comp.title}`,
     description: comp.description,
     keywords: comp.keywords,
     openGraph: {

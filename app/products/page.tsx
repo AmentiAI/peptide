@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
   const baseUrl = site.baseUrl || 'https://peptidevault.com'
-  const title = `Research Peptides Catalog | ${site.name}`
+  const title = `Research Peptides Catalog`
   const description = `Browse ${Object.keys(PRODUCTS).length}+ premium research peptides — BPC-157, TB-500, Semaglutide, Tirzepatide and more. Lab-tested with Certificate of Analysis. ${site.name}.`
   return {
     title,
