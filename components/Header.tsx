@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { SiteConfig } from '@/lib/sites'
 
 interface HeaderProps {
@@ -10,17 +11,20 @@ interface HeaderProps {
 
 export default function Header({ site }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
 
   const navLinks = [
     { href: '/products', label: 'Products' },
     { href: '/stacks', label: 'Stacks' },
-    { href: '/guides', label: 'Research Guides' },
-    { href: '/about', label: 'About' },
+    { href: '/guides', label: 'Blog', badge: 'New' },
+    { href: '/compare/bpc-157-vs-tb-500', label: 'Compare' },
     { href: '/faq', label: 'FAQ' },
   ]
 
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
+
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -40,9 +44,21 @@ export default function Header({ site }: HeaderProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-1.5 ${
+                  isActive(link.href)
+                    ? 'text-indigo-600 bg-indigo-50'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
               >
                 {link.label}
+                {link.badge && (
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-r from-indigo-500 to-purple-500 text-white leading-none">
+                    {link.badge}
+                  </span>
+                )}
+                {isActive(link.href) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-indigo-500 rounded-full" />
+                )}
               </Link>
             ))}
           </nav>
