@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:pantheonpeptides.com)"
+      "WebFetch(domain:pantheonpeptides.com)",
+      "Bash(git pull:*)",
+      "Bash(git:*)"
     ]
   }
 }
