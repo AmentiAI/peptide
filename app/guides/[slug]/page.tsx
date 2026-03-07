@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+
+const FALLBACK_HERO = 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&h=600&q=80'
 import { getGuide as getGuideFromFS, getGuides as getGuidesFromFS } from '@/lib/guides'
 import { getGuide as getGuideFromDB } from '@/lib/db-guides'
 import { PRODUCTS } from '@/lib/products'
@@ -145,7 +147,7 @@ export default async function GuidePage({ params }: Props) {
   const dbGuide = await getGuideFromDB(slug).catch(() => null)
 
   let title: string, description: string, date: string | null, readTime: string | null,
-      tags: string[], content: string, relatedProductSlugs: string[]
+      tags: string[], content: string, relatedProductSlugs: string[], heroImage: string
 
   if (dbGuide) {
     title = dbGuide.title
@@ -155,6 +157,7 @@ export default async function GuidePage({ params }: Props) {
     tags = dbGuide.tags
     content = dbGuide.content
     relatedProductSlugs = dbGuide.relatedProductSlugs
+    heroImage = FALLBACK_HERO
   } else {
     const guide = await getGuideFromFS(slug).catch(() => null)
     if (!guide) notFound()
@@ -165,6 +168,7 @@ export default async function GuidePage({ params }: Props) {
     tags = guide.frontmatter.tags ?? []
     content = guide.content
     relatedProductSlugs = guide.frontmatter.relatedProducts ?? []
+    heroImage = guide.frontmatter.image ?? FALLBACK_HERO
   }
 
   const relatedProducts = relatedProductSlugs.map((s) => PRODUCTS[s]).filter(Boolean) as NonNullable<typeof PRODUCTS[string]>[]
@@ -187,13 +191,22 @@ export default async function GuidePage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ── Article Hero ──────────────────────────────────────── */}
-      <div className="bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      {/* ── Article Hero (full-bleed image) ───────────────────────── */}
+      <div className="relative overflow-hidden" style={{ minHeight: '420px' }}>
+        {/* Full-bleed background image */}
+        <Image
+          src={heroImage}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        {/* Dark gradient overlay — heavier at bottom for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/80 to-gray-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-950/60 to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-white/50 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -212,10 +225,10 @@ export default async function GuidePage({ params }: Props) {
             ))}
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-5 leading-tight max-w-4xl">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-5 leading-tight max-w-4xl drop-shadow-lg">
             {title}
           </h1>
-          <p className="text-xl text-white/70 mb-8 max-w-3xl leading-relaxed">
+          <p className="text-lg md:text-xl text-white/75 mb-8 max-w-3xl leading-relaxed">
             {description}
           </p>
 

@@ -10,6 +10,7 @@ export interface GuideFrontmatter {
   date: string
   tags?: string[]
   readTime?: number
+  image?: string
   relatedProducts?: string[]
 }
 
@@ -26,6 +27,7 @@ export interface GuideMeta {
   date: string
   tags?: string[]
   readTime?: number
+  image?: string
 }
 
 export async function getGuides(): Promise<GuideMeta[]> {
@@ -45,6 +47,7 @@ export async function getGuides(): Promise<GuideMeta[]> {
       date: data.date || '',
       tags: data.tags || [],
       readTime: data.readTime,
+      image: data.image,
     }
   })
 

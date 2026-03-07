@@ -25,6 +25,7 @@ type GuideItem = {
   tags?: string[]
   date?: string
   readTime?: string | number
+  image?: string
 }
 
 const CATEGORIES = ['All', 'Healing & Recovery', 'Growth Hormone', 'Metabolic', 'Anti-Aging', 'Cognitive', 'How-To']
@@ -58,6 +59,7 @@ export default async function GuidesPage() {
       tags: g.tags,
       date: g.date,
       readTime: g.readTime,
+      image: g.image,
     }))
   }
 
@@ -155,6 +157,7 @@ export default async function GuidesPage() {
               date={featured.date}
               readTime={featured.readTime}
               tags={featured.tags}
+              image={featured.image}
               featured
             />
           </div>
@@ -178,6 +181,7 @@ export default async function GuidesPage() {
                   date={guide.date}
                   readTime={guide.readTime}
                   tags={guide.tags}
+                  image={guide.image}
                 />
               ))}
             </div>
