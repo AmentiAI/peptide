@@ -1,23 +1,38 @@
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { getSiteFromHeaders } from '@/lib/sites'
+// getSiteFromHeaders used in generateMetadata and page function
 import { PRODUCTS } from '@/lib/products'
 import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers()
+  const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
+  const OG_IMAGE = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&h=630&q=80'
+
   return {
-    title: `Research Peptide Stacks — Synergistic Combinations`,
+    title: `Research Peptide Stacks — 8 Synergistic Protocols`,
     description:
-      'Explore the most researched peptide stacking protocols. Healing, GH optimization, anti-aging, cognitive, metabolic, and immune stacks — with mechanisms, dosing guidance, and product links.',
+      'Explore 8 research-backed peptide stacking protocols. Healing, GH optimization, anti-aging, cognitive, metabolic, longevity, and immune stacks — with mechanisms, dosing guidance, and product links.',
     keywords: [
       'peptide stacks', 'peptide combinations', 'bpc-157 tb-500 stack',
       'cjc-1295 ipamorelin stack', 'ghk-cu sermorelin stack', 'research peptide protocol',
-      'best peptide stack', 'peptide stacking guide',
+      'best peptide stack', 'peptide stacking guide', 'healing peptide stack', 'anti-aging peptide stack',
     ],
+    alternates: { canonical: `${baseUrl}/stacks` },
     openGraph: {
-      title: `Peptide Research Stacks`,
-      description: 'The most researched synergistic peptide combinations.',
+      title: `Peptide Research Stacks — 8 Synergistic Protocols`,
+      description: '8 research-backed synergistic peptide combinations with full protocols.',
       type: 'website',
+      url: `${baseUrl}/stacks`,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Peptide Research Stacks' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Peptide Research Stacks`,
+      description: '8 synergistic peptide stacking protocols with dosing guidance.',
+      images: [OG_IMAGE],
     },
   }
 }

@@ -14,7 +14,19 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Research Blog & Peptide Guides`,
     description: `In-depth research guides on BPC-157, TB-500, CJC-1295, Tirzepatide, and more. Science-backed articles on peptide mechanisms, dosing, and stacking.`,
     alternates: { canonical: `${baseUrl}/guides` },
-    openGraph: { title: `Research Blog`, type: 'website', url: `${baseUrl}/guides` },
+    openGraph: {
+      title: `Peptide Research Guides & Blog`,
+      description: `In-depth research guides on BPC-157, TB-500, CJC-1295, Tirzepatide, and more. Science-backed articles on peptide mechanisms, dosing, and stacking.`,
+      type: 'website',
+      url: `${baseUrl}/guides`,
+      images: [{ url: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&h=630&q=80', width: 1200, height: 630, alt: 'Peptide Research Guides' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Peptide Research Guides`,
+      description: `Science-backed guides on BPC-157, TB-500, CJC-1295, and more.`,
+      images: ['https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&h=630&q=80'],
+    },
   }
 }
 

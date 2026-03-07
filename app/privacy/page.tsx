@@ -5,9 +5,13 @@ import type { Metadata } from 'next'
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
   return {
     title: `Privacy Policy`,
     description: `Privacy policy for ${site.name}. Learn how we collect, use, and protect your information.`,
+    alternates: { canonical: `${baseUrl}/privacy` },
+    openGraph: { title: `Privacy Policy`, description: `Privacy policy for ${site.name}.`, type: 'website', url: `${baseUrl}/privacy` },
+    robots: { index: false, follow: false },
   }
 }
 

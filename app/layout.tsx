@@ -69,7 +69,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     name: site.name,
     url: site.baseUrl,
     description: site.description,
-    logo: site.logo ?? `${site.baseUrl}/favicon.ico`,
+    logo: { '@type': 'ImageObject', url: site.logo ?? `${site.baseUrl}/favicon.ico` },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Support',
+      url: 'https://pantheonpeptides.com/partner/AmentiAI/',
+      areaServed: 'US',
+    },
+    sameAs: ['https://pantheonpeptides.com'],
+  }
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.baseUrl,
+    description: site.description,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${site.baseUrl}/products?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
   }
 
   return (
@@ -82,10 +102,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             --primary-dark: color-mix(in srgb, ${site.primaryColor} 80%, black);
           }
         `}</style>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
         <ScrollTicker />

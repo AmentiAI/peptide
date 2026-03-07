@@ -30,12 +30,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = dbGuide?.title ?? (await getGuideFromFS(slug).catch(() => null))?.frontmatter.title ?? slug
   const description = dbGuide?.description ?? (await getGuideFromFS(slug).catch(() => null))?.frontmatter.description ?? ''
 
+  const fsGuide2 = dbGuide ? null : await getGuideFromFS(slug).catch(() => null)
+  const guideImage = fsGuide2?.frontmatter.image ?? 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&h=630&q=80'
+
   return {
     title: `${title} | Research Blog`,
     description,
     alternates: { canonical: `${baseUrl}/guides/${slug}` },
-    openGraph: { title, description, type: 'article', url: `${baseUrl}/guides/${slug}` },
-    twitter: { card: 'summary_large_image', title, description },
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `${baseUrl}/guides/${slug}`,
+      images: [{ url: guideImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: [guideImage] },
   }
 }
 
@@ -180,16 +189,29 @@ export default async function GuidePage({ params }: Props) {
     '@type': 'Article',
     headline: title,
     description,
-    author: { '@type': 'Organization', name: site.name },
-    publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: `${baseUrl}/logo.png` } },
+    image: heroImage,
+    author: { '@type': 'Organization', name: site.name, url: baseUrl },
+    publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: `${baseUrl}/favicon.ico` } },
     datePublished: date,
+    dateModified: date ?? new Date().toISOString().split('T')[0],
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${baseUrl}/guides/${slug}` },
     keywords: tags.join(', '),
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: 'Research Blog', item: `${baseUrl}/guides` },
+      { '@type': 'ListItem', position: 3, name: title, item: `${baseUrl}/guides/${slug}` },
+    ],
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       {/* ── Article Hero (full-bleed image) ───────────────────────── */}
       <div className="relative overflow-hidden" style={{ minHeight: '420px' }}>

@@ -92,15 +92,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!cat) return {}
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
+  const OG_IMAGE = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&h=630&q=80'
   return {
-    title: `${cat.name}`,
+    title: `${cat.name} — Research Peptide Catalog`,
     description: cat.description,
     keywords: cat.keywords,
+    alternates: { canonical: `${baseUrl}/category/${slug}` },
     openGraph: {
       title: cat.name,
       description: cat.description,
       type: 'website',
+      url: `${baseUrl}/category/${slug}`,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: cat.name }],
     },
+    twitter: { card: 'summary_large_image', title: cat.name, description: cat.description, images: [OG_IMAGE] },
   }
 }
 
@@ -129,12 +135,22 @@ export default async function CategoryPage({ params }: Props) {
   }
   const comparisons = RELATED_COMPARISONS[slug] ?? []
 
+  const baseUrlPage = site.baseUrl || 'https://peptidevault.com'
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: cat.name,
     description: cat.description,
-    url: `${site.baseUrl}/category/${slug}`,
+    url: `${baseUrlPage}/category/${slug}`,
+  }
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrlPage },
+      { '@type': 'ListItem', position: 2, name: 'Products', item: `${baseUrlPage}/products` },
+      { '@type': 'ListItem', position: 3, name: cat.name, item: `${baseUrlPage}/category/${slug}` },
+    ],
   }
 
   return (
@@ -219,10 +235,8 @@ export default async function CategoryPage({ params }: Props) {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
     </main>
   )
 }

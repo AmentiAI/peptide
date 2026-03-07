@@ -85,24 +85,38 @@ export default async function ProductDetailPage({ params }: Props) {
     description: product.longDescription,
     image: product.image,
     sku: product.slug,
+    mpn: product.slug,
     category: product.category,
     brand: { '@type': 'Brand', name: 'Pantheon Peptides' },
     offers: {
       '@type': 'Offer',
       url: `${baseUrl}/go/${slug}`,
       availability: 'https://schema.org/InStock',
-      seller: { '@type': 'Organization', name: 'Pantheon Peptides' },
+      priceCurrency: 'USD',
+      seller: { '@type': 'Organization', name: 'Pantheon Peptides', url: 'https://pantheonpeptides.com' },
     },
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Dosage', value: product.dosage },
       { '@type': 'PropertyValue', name: 'Half-life', value: product.halfLife },
       { '@type': 'PropertyValue', name: 'Purity', value: '99%+' },
+      { '@type': 'PropertyValue', name: 'Form', value: content?.dosingProtocol.form ?? 'Lyophilized powder' },
+    ],
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: 'Products', item: `${baseUrl}/products` },
+      { '@type': 'ListItem', position: 3, name: product.name, item: `${baseUrl}/products/${slug}` },
     ],
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <div className={`bg-gradient-to-br ${gradient} relative overflow-hidden`}>

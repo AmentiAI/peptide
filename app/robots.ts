@@ -12,9 +12,19 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/api/admin/'],
+        disallow: ['/admin/', '/api/'],
+      },
+      {
+        // Block aggressive SEO scrapers from overloading the server
+        userAgent: 'AhrefsBot',
+        crawlDelay: 10,
+      },
+      {
+        userAgent: 'SemrushBot',
+        crawlDelay: 10,
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   }
 }

@@ -24,6 +24,27 @@ async function getSiteIdByDomain(host: string): Promise<number | null> {
   }
 }
 
+export async function generateMetadata() {
+  const headersList = await headers()
+  const dbSite2 = await getSiteFromDB(headersList.get('host') || 'peptidevault.com').catch(() => null)
+  const site2 = dbSite2 ?? getSiteFromHeaders(headersList)
+  const baseUrl = site2.baseUrl || 'https://peptidevault.com'
+  const OG_IMAGE = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&h=630&q=80'
+  return {
+    title: `${site2.name} — ${site2.tagline}`,
+    description: site2.description,
+    alternates: { canonical: baseUrl },
+    openGraph: {
+      title: `${site2.name} — ${site2.tagline}`,
+      description: site2.description,
+      type: 'website' as const,
+      url: baseUrl,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site2.name }],
+    },
+    twitter: { card: 'summary_large_image' as const, title: site2.name, description: site2.description, images: [OG_IMAGE] },
+  }
+}
+
 export default async function HomePage() {
   const headersList = await headers()
   const host =
@@ -65,6 +86,9 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* SEO H1 — visually hidden, crawlable */}
+      <h1 className="sr-only">{site.name} — {site.tagline}</h1>
+
       {/* Hero Carousel */}
       <HeroCarousel
         slides={carouselSlides}

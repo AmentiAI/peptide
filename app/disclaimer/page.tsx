@@ -5,9 +5,13 @@ import type { Metadata } from 'next'
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
   return {
     title: `Disclaimer & Terms of Use`,
     description: `Legal disclaimer for ${site.name}. All research peptides on this site are for laboratory use only and not intended for human consumption or therapeutic use.`,
+    alternates: { canonical: `${baseUrl}/disclaimer` },
+    openGraph: { title: `Disclaimer & Terms of Use`, description: `Legal disclaimer and terms for ${site.name}.`, type: 'website', url: `${baseUrl}/disclaimer` },
+    robots: { index: false, follow: false },
   }
 }
 

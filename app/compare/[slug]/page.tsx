@@ -53,8 +53,16 @@ function buildAutoComparison(a: Product, b: Product) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const comp = getComparison(slug)
+  const OG_IMAGE_DEFAULT = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&h=630&q=80'
   if (comp) {
-    return { title: comp.title, description: comp.description, keywords: comp.keywords }
+    return {
+      title: comp.title,
+      description: comp.description,
+      keywords: comp.keywords,
+      alternates: { canonical: `https://peptidevault.com/compare/${slug}` },
+      openGraph: { title: comp.title, description: comp.description, type: 'article', images: [{ url: OG_IMAGE_DEFAULT, width: 1200, height: 630 }] },
+      twitter: { card: 'summary_large_image' as const, title: comp.title, description: comp.description, images: [OG_IMAGE_DEFAULT] },
+    }
   }
   const parsed = parseCompareSlug(slug)
   if (!parsed) return {}
@@ -63,11 +71,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const b = PRODUCTS[sb]
   if (!a || !b) return {}
   const auto = buildAutoComparison(a, b)
+  const OG_IMAGE = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&h=630&q=80'
   return {
     title: auto.title,
     description: auto.description,
     keywords: auto.keywords,
-    openGraph: { title: auto.title, description: auto.description, type: 'article' },
+    alternates: { canonical: `https://peptidevault.com/compare/${slug}` },
+    openGraph: { title: auto.title, description: auto.description, type: 'article', images: [{ url: OG_IMAGE, width: 1200, height: 630 }] },
+    twitter: { card: 'summary_large_image', title: auto.title, description: auto.description, images: [OG_IMAGE] },
   }
 }
 
@@ -128,9 +139,20 @@ export default async function ComparisonPage({ params }: Props) {
     '@type': 'Article',
     headline: title,
     description,
-    author: { '@type': 'Organization', name: site.name },
-    publisher: { '@type': 'Organization', name: site.name, url: baseUrl },
-    mainEntityOfPage: `${baseUrl}/compare/${slug}`,
+    author: { '@type': 'Organization', name: site.name, url: baseUrl },
+    publisher: { '@type': 'Organization', name: site.name, url: baseUrl, logo: { '@type': 'ImageObject', url: `${baseUrl}/favicon.ico` } },
+    dateModified: new Date().toISOString().split('T')[0],
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${baseUrl}/compare/${slug}` },
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: `${baseUrl}/compare` },
+      { '@type': 'ListItem', position: 3, name: `${productA.shortName} vs ${productB.shortName}`, item: `${baseUrl}/compare/${slug}` },
+    ],
   }
 
   const CATEGORY_COLOR: Record<string, string> = {
@@ -148,6 +170,7 @@ export default async function ComparisonPage({ params }: Props) {
   return (
     <main className="bg-gray-50 min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       {/* Hero */}
       <div className="bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 relative overflow-hidden">

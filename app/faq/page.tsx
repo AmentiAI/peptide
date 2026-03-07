@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers()
   const site = getSiteFromHeaders(headersList)
+  const baseUrl = site.baseUrl || 'https://peptidevault.com'
   return {
     title: `Frequently Asked Questions — Research Peptides`,
     description: `Answers to the most common questions about research peptides — purity standards, ordering, shipping, reconstitution, storage, and safety considerations.`,
@@ -13,10 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
       'research peptide FAQ', 'peptide questions', 'how to buy peptides', 'peptide purity',
       'reconstitute peptides', 'peptide storage', 'peptide shipping', site.name,
     ],
+    alternates: { canonical: `${baseUrl}/faq` },
     openGraph: {
       title: `Research Peptide FAQ`,
       description: 'Common questions about research peptides answered.',
       type: 'website',
+      url: `${baseUrl}/faq`,
     },
   }
 }
