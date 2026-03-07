@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:pantheonpeptides.com)",
       "Bash(git pull:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(grep:*)"
     ]
   }
 }
